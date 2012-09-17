@@ -1,6 +1,7 @@
 #!/bin/zsh
 # Install all the packages for my Arch Linux Installs
 yaourt -Syy; 
+AUR_FAIL=();
 GMP=(`pacman -Ss gimp | grep -v help | perl -p -i -e 's/^.*\/(.*).+/$1/xs' | sed -e's/\s.*//'`); 
 TTF=(`pacman -Ss ttf- |  perl -p -i -e 's/^.*\/(.*).+/$1/xs' | sed -e's/\s.*//'`); 
 GST=(`pacman -Ss gstreamer0.10- |  perl -p -i -e 's/^.*\/(.*).+/$1/xs' | sed -e's/\s.*//'`);
@@ -14,6 +15,16 @@ PACMAN=( abs ack ati-dri audex aurvote cabextract cdrdao cifs-utils clementine c
 AUR=( autokey cutycapt-svn gimp-extras google-chrome-dev google-earth hotot-gtk2 lib32-nss-mdns lightning-bin mrxvt nuvolaplayer perl-audio-flac-header perl-cgi-ex perl-cpanplus-dist-arch-git perl-critic perl-dbd-csv perl-devel-repl perl-gnome2-vte perl-html-query gtk-theme-plastiq perl-net-xwhois perl-rpc-xml perl-www-curl-simple perl-www-wikipedia psx qbittorrent-bin rhythmbox-equalizer-git rxvt-unicode-patched tclxosd ttf-mac-fonts ttf-ms-fonts ttf-vista-fonts xscreensaver-goban );
 
 yaourt -S --needed $GMP $TTF $GST $PROGRAMMING $PACMAN
-yaourt -S --noconfirm --needed $AUR $PROGRAMMING_AUR
+# AUR Package are likely to fail, let's get as much done as possible...
+n=1;
+for i in $AUR $PROGRAMMING_AUR;
+    do yaourt -S --noconfirm --needed $i;
+        if [[ $? > 0 ]]; then
+            $AUR_FAIL[$n] = $i;
+            $n++;
+        fi;
+done;
 gem install colortail
+echo "Failed AUR INSTALLS:";
+echo $AUR_FAIL;
 # yaourt -S synergy
