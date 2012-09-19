@@ -6,7 +6,7 @@ GMP=(`pacman -Ss gimp | grep -v help | perl -p -i -e 's/^.*\/(.*).+/$1/xs' | sed
 TTF=(`pacman -Ss ttf- |  perl -p -i -e 's/^.*\/(.*).+/$1/xs' | sed -e's/\s.*//'`); 
 GST=(`pacman -Ss gstreamer0.10- |  perl -p -i -e 's/^.*\/(.*).+/$1/xs' | sed -e's/\s.*//'`);
 
-PROGRAMMING=( anjuta anjuta-extras devhelp glade cython clojure fpc gjs gprolog go jre7-openjdk jdk7-openjdk lazarus lua nodejs ocaml php python ruby scala tcl valgrind )
+PROGRAMMING=( anjuta anjuta-extras devhelp glade cython clojure django fpc gjs gprolog go jre7-openjdk jdk7-openjdk lazarus lua nodejs ocaml php python ruby scala tcl valgrind )
 
 PROGRAMMING_AUR=( iolanguage-git bluej )
 
@@ -19,7 +19,7 @@ yaourt -S --needed $GMP $TTF $GST $PROGRAMMING $PACMAN
 n=1;
 for i in $AUR $PROGRAMMING_AUR;
     do yaourt -S --noconfirm --needed $i;
-        if [[ $? > 0 ]]; then
+        if [[ $? gt 0 ]]; then
             $AUR_FAIL[$n] = $i;
             $n++;
         fi;
