@@ -19,7 +19,7 @@ yaourt -S --needed $GMP $TTF $GST $PROGRAMMING $PACMAN
 n=1;
 for i in $AUR $PROGRAMMING_AUR;
     do yaourt -S --noconfirm --needed $i;
-        if [[ $? gt 0 ]]; then
+        if [[ "$?" -gt "0" ]]; then
             $AUR_FAIL[$n] = $i;
             $n++;
         fi;
