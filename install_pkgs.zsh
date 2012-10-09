@@ -1,6 +1,7 @@
 #!/bin/zsh
 # Install all the packages for my Arch Linux Installs
-yaourt -Syy; 
+yaourt -Syy;
+typeset -A AUR_FAIL;
 AUR_FAIL=();
 GMP=(`pacman -Ss gimp | grep -v help | perl -p -i -e 's/^.*\/(.*).+/$1/xs' | sed -e's/\s.*//'`); 
 TTF=(`pacman -Ss ttf- |  perl -p -i -e 's/^.*\/(.*).+/$1/xs' | sed -e's/\s.*//'`); 
