@@ -27,15 +27,16 @@ my @aur_pkgs =
 
 my $pacman = join( ' ', sort ( @meta_pkgs, @pacman_pkgs, @programming_pkgs ) );
 my @aur = sort ( @aur_pkgs, @programming_aur_pkgs );
-my $install_pacman = system( '/usr/bin/yaourt', '-S', '--needed', $pacman );
+my $install_pacman = system("/usr/bin/yaourt -S --needed $pacman");
+
 ## AUR Package are likely to fail, let's get as much done as possible...
 foreach my $package (@aur) {
-    my $return = system( '/usr/bin/yaourt', '-S', $package );
+    my $return = system("/usr/bin/yaourt -S --noconfirm $package");
     if ( $return != 0 ) {
         push @aur_fail, $package;
     }
 }
-my $gem_install = system( '/usr/bin/gem', 'install', 'colortail' );
-#my $install_synergy = system('yaourt', '-S', 'synergy');
+my $gem_install = system('/usr/bin/gem install colortail');
+#my $install_synergy = system('/usr/bin/yaourt -S synergy');
 print "Failed AUR Packages:\n";
 print Dumper( \@aur_fail );
