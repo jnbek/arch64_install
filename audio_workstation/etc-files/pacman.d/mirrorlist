@@ -1,0 +1,4 @@
+# Utah Centric Mirrorlist
+Server = http://mirrors.xmission.com/archlinux/$repo/os/$arch
+Server = http://mirror.us.leaseweb.net/archlinux/$repo/os/$arch
+Server = http://ftp.osuosl.org/pub/archlinux/$repo/os/$arch
