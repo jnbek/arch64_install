@@ -15,6 +15,11 @@ my @meta_pkgs = split( /\n/, $gstreamer . $ttf );
 
 my @pacman_pkgs = qw(
   abs
+  dbus-glib
+  python-dbus
+  whois
+  dnsutils
+  xorg-utils
   ack
   audacity
   audacious
