@@ -16,6 +16,7 @@ my @meta_pkgs = split( /\n/, $gstreamer . $ttf );
 my @pacman_pkgs = qw(
   abs
   dbus-glib
+  python2-dbus 
   python-dbus
   whois
   dnsutils
