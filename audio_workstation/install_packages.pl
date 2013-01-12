@@ -18,6 +18,7 @@ my @pacman_pkgs = qw(
   dbus-glib
   python2-dbus 
   python-dbus
+  calf
   whois
   dnsutils
   xorg-utils
